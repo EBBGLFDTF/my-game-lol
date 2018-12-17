@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 343013588640822618}
   - component: {fileID: 6022935113942515008}
   - component: {fileID: 5953211992290232943}
-  - component: {fileID: 358818502674466148}
+  - component: {fileID: 1606331758859501353}
   m_Layer: 0
   m_Name: sprite_Platform
   m_TagString: Untagged
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ca912d959bdf56b49950c94f00986458, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.8746815, a: 1}
+  m_Color: {r: 1, g: 0.43725848, b: 0.24056602, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -102,7 +102,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &358818502674466148
+--- !u!61 &1606331758859501353
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

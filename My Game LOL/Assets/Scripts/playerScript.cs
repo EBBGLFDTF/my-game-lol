@@ -11,8 +11,8 @@ public class playerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		Debug.Log("Y'all bitches best be readY" + yourName);
-		rb = GetComponent<Rigidbody2D>();
+		Debug.Log("Y'all bitches best be readY " + yourName);
+		Rigidbody2D rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
