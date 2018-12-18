@@ -13,11 +13,17 @@ public class playerScript : MonoBehaviour
     {
 		Debug.Log("Y'all bitches best be readY " + yourName);
 		Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+		double sideways = Input.GetAxis("Horizontal");
+		bool spacebar = Input.GetKey("Space");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+		if (playerScript.spacebar == true)
+		{
+
+		}
     }
 }
