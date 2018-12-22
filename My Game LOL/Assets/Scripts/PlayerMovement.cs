@@ -22,7 +22,6 @@ public class PlayerMovement: MonoBehaviour
 	private CharacterController controller;
 	private Vector2 move = Vector2.zero;
 	private float gravityOriginal;
-	// true for left, false for right
 
 	// Start is called before the first frame update
 	void Start()
