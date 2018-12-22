@@ -6,6 +6,7 @@ TagManager:
   tags:
   - platform
   - death
+  - enemy
   layers:
   - Default
   - TransparentFX

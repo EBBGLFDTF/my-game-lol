@@ -60,6 +60,17 @@ public class PlayerMovement: MonoBehaviour
 			rb.position = rb.position + (Vector2.right * speed / 10);
 		}
 
+		/*
+		//le move left and right but it's velocity based
+		if (Input.GetKeyDown(leftButton) == true)
+		{
+			rb.velocity = rb.velocity + (Vector2.left * speed / 10);
+		}
+		if (Input.GetKeyUp(leftButton) == true)
+		{
+			rb.velocity =
+		}
+		*/
 		//le shoot bomb
 		if (Input.GetKeyDown(shootRightButton) == true)
 		{
@@ -78,23 +89,27 @@ public class PlayerMovement: MonoBehaviour
 
 	void ThrowBomb(string direction)
 	{
-		Vector2 spawn = new Vector2(0, 1.5f);
 		FallingThing bomb = projectile.GetComponent<FallingThing>();
 		if (direction == "right")
 		{
-			bomb.direction = new Vector2(throwStrength / 10, 1);
+			Vector2 spawn = new Vector2(1f, 0);
+			bomb.direction = new Vector2(throwStrength * 9f, 0.7f);
 			Debug.Log("shoot direction: right");
+			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
 		else if(direction == "left")
 		{
-			bomb.direction = new Vector2(-throwStrength / 10, 1);
+			Vector2 spawn = new Vector2(-1f, 0);
+			bomb.direction = new Vector2(-throwStrength * 9f, 0.7f);
 			Debug.Log("shoot direction: left");
+			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
 		else if (direction == "up")
 		{
-			bomb.direction = new Vector2(0, throwStrength * .67f);
+			Vector2 spawn = new Vector2(0, 1.5f);
+			bomb.direction = new Vector2(0, throwStrength);
 			Debug.Log("shoot direction: up");
+			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
-		Instantiate(projectile, rb.position + spawn, transform.rotation);
 	}
 }

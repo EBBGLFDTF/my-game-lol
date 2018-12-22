@@ -20,7 +20,8 @@ public class FallingThing : MonoBehaviour
     {
 		rb = GetComponent<Rigidbody2D>();
 		t = GetComponent<Transform>();
-		rb.AddForce(Vector2.up * direction.y * 1000);
+		rb.AddForce(Vector2.up * direction.y * 100f);
+		rb.velocity = new Vector2(direction.x, 0);
 
 		willExplode = false;
 	}
@@ -29,8 +30,7 @@ public class FallingThing : MonoBehaviour
     void Update()
     {
 
-		//le fake gravity
-		//rb.position = rb.position + (Vector2.down * fallSpeed / 100);
+		/* le keeps going for some reason and won't bounce
 		if (direction.x > 0)
 		{
 			rb.position = rb.position + (Vector2.right * Mathf.Sqrt(direction.x * direction.x));
@@ -39,6 +39,7 @@ public class FallingThing : MonoBehaviour
 		{
 			rb.position = rb.position + (Vector2.left * Mathf.Sqrt(direction.x * direction.x));
 		}
+		*/
 
 		//boopy
 		if (Input.GetKeyDown(explodeButton) == true)
