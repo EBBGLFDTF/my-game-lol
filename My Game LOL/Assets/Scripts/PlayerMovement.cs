@@ -28,6 +28,5 @@ public class PlayerMovement: MonoBehaviour
     {
 		//le gravity
 		move.y -= gravity;
-
     }
 }
