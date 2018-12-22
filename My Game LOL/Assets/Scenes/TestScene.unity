@@ -823,20 +823,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: platform
       objectReference: {fileID: 0}
-    - target: {fileID: 342124763635874021, guid: 15ff3371a751b9c4a826b77601ab59c8,
-        type: 3}
-      propertyPath: m_TagString
-      value: platform
-      objectReference: {fileID: 0}
     - target: {fileID: 340701777822635508, guid: 15ff3371a751b9c4a826b77601ab59c8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.35
+      value: -1.38
       objectReference: {fileID: 0}
     - target: {fileID: 340701777822635508, guid: 15ff3371a751b9c4a826b77601ab59c8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.53
+      value: -0.47
       objectReference: {fileID: 0}
     - target: {fileID: 340701777822635508, guid: 15ff3371a751b9c4a826b77601ab59c8,
         type: 3}
