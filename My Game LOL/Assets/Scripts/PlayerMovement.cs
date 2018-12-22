@@ -11,16 +11,19 @@ public class PlayerMovement: MonoBehaviour
 	public string shootLeftButton;
 	public string shootRightButton;
 	public string shootUpButton;
+	public string shootDownButton;
 
 	public float speed;
 	public float jumpFactor;
 	public float throwStrength;
 
 	public GameObject projectile;
+	public GameObject animationComponent;
 
 	private Rigidbody2D rb;
 	private CharacterController controller;
 	private Vector2 move = Vector2.zero;
+	private Animation animationThing;
 	private float gravityOriginal;
 
 	// Start is called before the first frame update
@@ -29,6 +32,7 @@ public class PlayerMovement: MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		controller = GetComponent<CharacterController>();
 		gravityOriginal = rb.gravityScale;
+		animationThing = GetComponent<Animation>();
 		//deathBox = canKill.GetComponent<Collider2D>();
     }
 
@@ -71,6 +75,7 @@ public class PlayerMovement: MonoBehaviour
 			rb.velocity =
 		}
 		*/
+
 		//le shoot bomb
 		if (Input.GetKeyDown(shootRightButton) == true)
 		{
@@ -84,7 +89,11 @@ public class PlayerMovement: MonoBehaviour
 		{
 			ThrowBomb("up");
 		}
-    }
+		else if (Input.GetKeyDown(shootDownButton) == true)
+		{
+			ThrowBomb("down");
+		}
+	}
 
 
 	void ThrowBomb(string direction)
@@ -97,7 +106,7 @@ public class PlayerMovement: MonoBehaviour
 			Debug.Log("shoot direction: right");
 			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
-		else if(direction == "left")
+		else if (direction == "left")
 		{
 			Vector2 spawn = new Vector2(-1f, 0);
 			bomb.direction = new Vector2(-throwStrength * 9f, 0.7f);
@@ -107,8 +116,15 @@ public class PlayerMovement: MonoBehaviour
 		else if (direction == "up")
 		{
 			Vector2 spawn = new Vector2(0, 1.5f);
-			bomb.direction = new Vector2(0, throwStrength);
+			bomb.direction = new Vector2(0, throwStrength * 0.78f);
 			Debug.Log("shoot direction: up");
+			Instantiate(projectile, rb.position + spawn, transform.rotation);
+		}
+		else if (direction == "down")
+		{
+			Vector2 spawn = new Vector2(0, -1.5f);
+			bomb.direction = new Vector2(0, throwStrength * -0.78f);
+			Debug.Log("shoot direction: down");
 			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
 	}
