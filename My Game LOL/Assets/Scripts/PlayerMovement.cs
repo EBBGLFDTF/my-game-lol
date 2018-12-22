@@ -2,44 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement: MonoBehaviour
 {
+
+	public string jumpButton;
+	public string leftButton;
+	public string rightButton;
+
+	public float speed;
 	public float jumpFactor;
-	public float walkFactor;
+	public float gravity;
 
-	public string bindJump;
-	public string bindLeft;
-	public string bindRight;
+	private CharacterController controller;
+	private Vector2 move = Vector2.zero;
 
-    // Start is called before the first frame update
-    void Start()
+
+	// Start is called before the first frame update
+	void Start()
     {
-        
+		controller = GetComponent<CharacterController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-		Rigidbody2D rb = GetComponent<Rigidbody2D>();
-
-		bool jump = Input.GetKeyDown(bindJump);
-		bool left = Input.GetKey(bindLeft);
-		bool right = Input.GetKey(bindRight);
-
-		if (jump == true)
-		{
-			rb.AddForce(Vector2.up * jumpFactor);
-		}
-
-		if (left == true)
-		{
-			rb.AddForce(Vector2.left * walkFactor);
-		}
-
-		if (right == true)
-		{
-			rb.AddForce(Vector2.right * walkFactor);
-		}
+		//le gravity
+		move.y -= gravity;
 
     }
 }
