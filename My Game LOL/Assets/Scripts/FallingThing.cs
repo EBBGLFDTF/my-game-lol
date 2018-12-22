@@ -5,6 +5,10 @@ using UnityEngine;
 public class FallingThing : MonoBehaviour
 {
 	public float fallSpeed;
+
+	public bool willExplode;
+	public GameObject explosion;
+
 	private Rigidbody2D rb;
 	private Transform t;
 	
@@ -23,7 +27,12 @@ public class FallingThing : MonoBehaviour
 
 	void OnCollisionEnter2D()
 	{
-		Destroy(gameObject);
-		Debug.Log("it blew up");
+
+		if (willExplode == true)
+		{
+			Instantiate(explosion, transform.position, transform.rotation);
+			Debug.Log("it blew up");
+			Destroy(gameObject);
+		}
 	}
 }
