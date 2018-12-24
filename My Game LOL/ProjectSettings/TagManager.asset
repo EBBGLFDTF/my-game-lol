@@ -5,9 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - platform
-  - death
   - enemy
-  - harmEnemy
+  - wall
   layers:
   - Default
   - TransparentFX

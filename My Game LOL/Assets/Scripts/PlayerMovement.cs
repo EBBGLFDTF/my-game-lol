@@ -17,12 +17,10 @@ public class PlayerMovement: MonoBehaviour
 	public float jumpFactor;
 	public float throwStrength;
 
-	public GameObject projectile;
-	public GameObject animationComponent;
+	public GameObject projectile;			//this is the bomb
+	public GameObject animationComponent;	//I don't know what to do with this yet
 
 	private Rigidbody2D rb;
-	private CharacterController controller;
-	private Vector2 move = Vector2.zero;
 	private Animation animationThing;
 	private float gravityOriginal;
 
@@ -30,10 +28,8 @@ public class PlayerMovement: MonoBehaviour
 	void Start()
     {
 		rb = GetComponent<Rigidbody2D>();
-		controller = GetComponent<CharacterController>();
 		gravityOriginal = rb.gravityScale;
 		animationThing = GetComponent<Animation>();
-		//deathBox = canKill.GetComponent<Collider2D>();
     }
 
 	// Update is called once per frame
@@ -43,7 +39,7 @@ public class PlayerMovement: MonoBehaviour
 		//le jump
 		if (Input.GetKeyDown(jumpButton) == true)
 		{
-			rb.velocity = new Vector2(0, jumpFactor);
+			rb.velocity = new Vector2(rb.velocity.x, jumpFactor);
 		}
 		if (Input.GetKey(jumpButton) == true)
 		{
@@ -64,19 +60,28 @@ public class PlayerMovement: MonoBehaviour
 			rb.position = rb.position + (Vector2.right * speed / 10);
 		}
 
-		/*
-		//le move left and right but it's velocity based
-		if (Input.GetKeyDown(leftButton) == true)
+		#region velocity movement script
+		/*/le move left and right but velocity based doesn't work that well
+		if (Input.GetKeyDown(rightButton) == true)
 		{
-			rb.velocity = rb.velocity + (Vector2.left * speed / 10);
+			rb.velocity = rb.velocity + new Vector2(10, 0);
+		}
+		else if (Input.GetKeyDown(leftButton) == true)
+		{
+			rb.velocity = rb.velocity + new Vector2(-10, 0);
+		}
+
+		if (Input.GetKeyUp(rightButton) == true)
+		{
+			rb.velocity = rb.velocity + new Vector2(-10, 0);
 		}
 		if (Input.GetKeyUp(leftButton) == true)
 		{
-			rb.velocity =
-		}
-		*/
+			rb.velocity = rb.velocity + new Vector2(10, 0);
+		} */
 
-		//le shoot bomb
+
+		/*/le shoot bomb
 		if (Input.GetKeyDown(shootRightButton) == true)
 		{
 			ThrowBomb("right");
@@ -92,10 +97,34 @@ public class PlayerMovement: MonoBehaviour
 		else if (Input.GetKeyDown(shootDownButton) == true)
 		{
 			ThrowBomb("down");
+		} */
+		#endregion
+
+		//le shoot bomb v2
+		if (Input.GetKeyDown(shootRightButton) == true)
+		{
+			ThrowBomb(1, 0, 16, 0.2f);
+			Debug.Log("shoot direction: right");
 		}
+		else if (Input.GetKeyDown(shootLeftButton) == true)
+		{
+			ThrowBomb(-1, 0, -16, 0.2f);
+			Debug.Log("shoot direction: left");
+		}
+		else if (Input.GetKeyDown(shootUpButton) == true)
+		{
+			ThrowBomb(0, 1.5f, 0, 1f);
+			Debug.Log("shoot direction: up");
+		}
+		else if (Input.GetKeyDown(shootDownButton) == true)
+		{
+			ThrowBomb(0, -1.5f, 0, -1f);
+			Debug.Log("shoot direction: down");
+		}
+
 	}
-
-
+#region Old Throw Script
+	/* old bombThrowScript
 	void ThrowBomb(string direction)
 	{
 		FallingThing bomb = projectile.GetComponent<FallingThing>();
@@ -127,5 +156,18 @@ public class PlayerMovement: MonoBehaviour
 			Debug.Log("shoot direction: down");
 			Instantiate(projectile, rb.position + spawn, transform.rotation);
 		}
+	}
+	*/
+#endregion
+
+	void ThrowBomb(float spawnX, float spawnY, float throwX, float throwY)
+	{
+		//recoil
+		rb.velocity = rb.velocity + new Vector2(-throwX / 2, throwY);
+
+		FallingThing bomb = projectile.GetComponent<FallingThing>();
+		Vector2 spawn = new Vector2(spawnX, spawnY);
+		bomb.direction = new Vector2(throwStrength * throwX, throwStrength * throwY);
+		Instantiate(projectile, rb.position + spawn, transform.rotation);
 	}
 }

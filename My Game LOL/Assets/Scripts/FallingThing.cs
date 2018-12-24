@@ -5,7 +5,6 @@ using UnityEngine;
 public class FallingThing : MonoBehaviour
 {
 	public Vector2 direction;
-	public float speed;
 
 	public string explodeButton;
 
