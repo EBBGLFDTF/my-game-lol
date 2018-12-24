@@ -6,6 +6,7 @@ public class Explosion : MonoBehaviour
 {
 	public int i;
 	public float blastPower;
+	public int dmg;
 	
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Explosion : MonoBehaviour
 		}
     }
 
-	void OnCollisionStay2D(Collision2D collision)
+	void OnCollisionEnter2D(Collision2D collision)
 	{
 		Vector2 rad = collision.gameObject.transform.position - transform.position;
 		float magnitude = 3 - rad.magnitude;
@@ -33,8 +34,16 @@ public class Explosion : MonoBehaviour
 
 		if (collision.gameObject.tag == "enemy")
 		{
+			collision.gameObject.GetComponent<HealthSystem>().Damage(dmg);
+		}
+
+		/* /testing
+		if (collision.gameObject.tag == "enemy")
+		{
+			collision.gameObject.GetComponent<HealthSystem>().Damage(dmg);
 			Destroy(collision.gameObject);
 			Debug.Log("enemy blew up");
 		}
+		*/
 	}
 }

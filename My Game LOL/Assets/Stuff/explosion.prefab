@@ -133,3 +133,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   i: 0
   blastPower: 5.2
+  dmg: 5

@@ -135,5 +135,7 @@ MonoBehaviour:
   speed: 4
   explodeButton: left shift
   willExplode: 1
+  dmg: 2
+  fuse: 3
   explosion: {fileID: 5158132293921657068, guid: a45c05b2ed913004688f7f24610e25a1,
     type: 3}

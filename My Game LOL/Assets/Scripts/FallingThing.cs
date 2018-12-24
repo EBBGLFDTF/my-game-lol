@@ -10,6 +10,8 @@ public class FallingThing : MonoBehaviour
 	public string explodeButton;
 
 	public bool willExplode;
+	public int dmg;
+	public int fuse;
 	public GameObject explosion;
 
 	private Rigidbody2D rb;
@@ -24,6 +26,7 @@ public class FallingThing : MonoBehaviour
 		rb.velocity = new Vector2(direction.x, 0);
 
 		willExplode = false;
+		fuse = fuse * 60;
 	}
 
     // Update is called once per frame
@@ -42,20 +45,36 @@ public class FallingThing : MonoBehaviour
 		*/
 
 		//boopy
+
+		fuse = fuse - 1;
+		if (fuse == 0)
+		{
+			BlowUp();
+		}
+
 		if (Input.GetKeyDown(explodeButton) == true)
 		{
 			willExplode = true;
 		}
     }
-
-	void OnCollisionEnter2D()
+	void OnCollisionEnter2D(Collision2D collision)
 	{
+
+		if (collision.gameObject.tag == "enemy")
+		{
+			collision.gameObject.GetComponent<HealthSystem>().Damage(dmg);
+		}
 
 		if (willExplode == true)
 		{
-			Instantiate(explosion, transform.position, transform.rotation);
-			Debug.Log("it blew up");
-			Destroy(gameObject);
+			BlowUp();
 		}
+	}
+
+	void BlowUp()
+	{
+		Instantiate(explosion, transform.position, transform.rotation);
+		Debug.Log("it blew up");
+		Destroy(gameObject);
 	}
 }
