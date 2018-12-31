@@ -100,15 +100,17 @@ public class PlayerMovement: MonoBehaviour
 		} */
 		#endregion
 
-		//le shoot bomb v2
+		//le shoot bomb v2 and hit people
 		if (Input.GetKeyDown(shootRightButton) == true)
 		{
-			ThrowBomb(1, 0, 16, 0.2f);
+			Punch(1,0);
+			//ThrowBomb(1, 0, 16, 0.2f);
 			Debug.Log("shoot direction: right");
 		}
 		else if (Input.GetKeyDown(shootLeftButton) == true)
 		{
-			ThrowBomb(-1, 0, -16, 0.2f);
+			Punch(-1,0);
+			//ThrowBomb(-1, 0, -16, 0.2f);
 			Debug.Log("shoot direction: left");
 		}
 		else if (Input.GetKeyDown(shootUpButton) == true)
@@ -169,5 +171,25 @@ public class PlayerMovement: MonoBehaviour
 		Vector2 spawn = new Vector2(spawnX, spawnY);
 		bomb.direction = new Vector2(throwStrength * throwX, throwStrength * throwY);
 		Instantiate(projectile, rb.position + spawn, transform.rotation);
+	}
+
+	void Punch(float xSpawn, float ySpawn)
+	{
+		GameObject punch = new GameObject("punch");
+		punch.AddComponent<Rigidbody2D>();
+		punch.AddComponent<CircleCollider2D>();
+		punch.AddComponent<Hitbox>();
+		Rigidbody2D punchRb = punch.GetComponent<Rigidbody2D>();
+		CircleCollider2D punchCol = punch.GetComponent<CircleCollider2D>();
+		Hitbox punchHB = punch.GetComponent<Hitbox>();
+
+		punchRb.bodyType = RigidbodyType2D.Kinematic;
+		punchRb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+
+		punchHB.source = gameObject;
+		punchHB.xSpawn = xSpawn;
+		punchHB.ySpawn = ySpawn;
+		punchHB.dmg = 10;
+		punchHB.activeFrames = 30;
 	}
 }
